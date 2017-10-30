@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>รายการสินค้า</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="logout()">
+        <ion-icon name="log-out"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-searchbar (ionInput)="search($event)" debounce="1000"></ion-searchbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-fab right bottom>
+    <button ion-fab color="danger" (click)="add()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+  <ion-list>
+    <button ion-item *ngFor="let product of products">
+      <ion-thumbnail item-left>
+        <img [src]="product.photo" *ngIf="product.photo">
+      </ion-thumbnail>
+      <h1>{{ product.name }}</h1>
+      <p>คงเหลือ: {{ product.on_hand }}</p>
+    </button>
+  </ion-list>
+</ion-content>

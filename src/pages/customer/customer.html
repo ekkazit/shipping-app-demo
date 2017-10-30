@@ -1,0 +1,12 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Customer</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <h1>{{ customer.name }}</h1>
+  <p>ID: {{ customer.id }}</p>
+  <p>Email: {{ customer.email }}</p>
+  <button ion-button block color="danger" (click)="backToHome()">ย้อนกลับ</button>
+</ion-content>
