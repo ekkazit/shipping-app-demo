@@ -37,7 +37,6 @@ export class QrcodePage {
     public loadingCtrl: LoadingController,
     public modalCtrl: ModalController,
   ) {
-    this.signatureImage = navParams.get('signatureImage');
   }
 
   ionViewDidLoad() {
