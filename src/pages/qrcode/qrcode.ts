@@ -74,9 +74,12 @@ export class QrcodePage {
   }
 
   takeSignature() {
-    setTimeout(() => {
-      let modal = this.modalCtrl.create(SignaturePage);
-      modal.present();
-    }, 300);
+    let modal = this.modalCtrl.create(SignaturePage);
+    modal.onDidDismiss(data => {
+      if (data) {
+        this.signatureImage = data.signatureImage;
+      }
+    });
+    modal.present();
   }
 }

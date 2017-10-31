@@ -1,6 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { QrcodePage } from '../qrcode/qrcode';
+import { App, IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 
 import { SignaturePad } from 'angular2-signaturepad/signature-pad';
 
@@ -20,7 +19,7 @@ export class SignaturePage {
 
   public signatureImage: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public app: App, public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
   }
 
   ionViewDidLoad() {
@@ -28,12 +27,12 @@ export class SignaturePage {
   }
 
   drawCancel() {
-    this.navCtrl.push(QrcodePage);
+    this.viewCtrl.dismiss();
   }
 
   drawComplete() {
     this.signatureImage = this.signaturePad.toDataURL();
-    this.navCtrl.push(QrcodePage, { signatureImage: this.signatureImage });
+    this.viewCtrl.dismiss({ signatureImage: this.signatureImage });
   }
 
   drawClear() {
