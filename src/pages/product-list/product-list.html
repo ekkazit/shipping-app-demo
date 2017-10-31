@@ -20,12 +20,12 @@
     </ion-refresher-content>
   </ion-refresher>
   <ion-fab right bottom>
-    <button ion-fab color="danger" (click)="add()">
+    <button ion-fab color="danger" (click)="addProduct()">
       <ion-icon name="add"></ion-icon>
     </button>
   </ion-fab>
   <ion-list>
-    <button ion-item *ngFor="let product of products">
+    <button ion-item *ngFor="let product of products" (click)="editProduct(product)">
       <ion-thumbnail item-left>
         <img [src]="product.photo" *ngIf="product.photo">
       </ion-thumbnail>

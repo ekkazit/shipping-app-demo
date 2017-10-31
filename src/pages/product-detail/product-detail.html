@@ -1,0 +1,86 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>ข้อมูลสินค้า</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-left [disabled]="code.errors || name.errors" (click)="save()">
+        <ion-icon name="create"></ion-icon>
+        SAVE
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-item-group>
+    <ion-item-divider color="light">รายละเอียดสินค้า</ion-item-divider>
+
+    <ion-item>
+      <ion-label floating>รหัส</ion-label>
+      <ion-input type="text" [(ngModel)]="product.code" id="code" #code="ngModel" required></ion-input>
+    </ion-item>
+    <div padding class="error-border" *ngIf="code.errors && (code.dirty || code.touched)">กรุณากรอกรหัสสินค้า</div>
+
+    <ion-item>
+      <ion-label floating>ชื่อสินค้า</ion-label>
+      <ion-input type="text" [(ngModel)]="product.name" id="nane" #name="ngModel" required></ion-input>
+    </ion-item>
+    <div padding class="error-border" *ngIf="name.errors && (name.dirty || name.touched)">กรุณากรอกชื่อสินค้า</div>
+
+    <ion-item>
+      <ion-label floating>คงเหลือ</ion-label>
+      <ion-input type="text" [(ngModel)]="product.on_hand"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>ราคาต่อหน่วย</ion-label>
+      <ion-input type="text" [(ngModel)]="product.unit_price"></ion-input>
+    </ion-item>
+  </ion-item-group>
+
+  <ion-item-group>
+    <ion-item-divider color="light">ข้อมูลเพิ่มเติม</ion-item-divider>
+    <ion-item>
+      <ion-label floating>ประเภทสินค้า</ion-label>
+      <ion-select [(ngModel)]="product.category_id">
+        <ion-option [value]="1">เสื้อยืด</ion-option>
+        <ion-option [value]="2">เสื้อโปโล</ion-option>
+        <ion-option [value]="3">เสื้อเชิ้ต</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-item-group>
+
+  <ion-item-group>
+    <ion-item-divider color="light">รูปสินค้า</ion-item-divider>
+    <ion-card>
+      <ion-item>
+        <ion-avatar item-left>
+          <img src="./assets/imgs/profile.jpg">
+        </ion-avatar>
+        <h2>Take or Browse Picture</h2>
+        <p>รูปสินค้า</p>
+      </ion-item>
+      <img [src]="product.photo" *ngIf="product.photo">
+      <img src="./assets/imgs/no-image.png" *ngIf="!product.photo" padding>
+      <ion-row>
+        <ion-col>
+          <button ion-button clear small icon-left (click)="takePicture()">
+            <ion-icon name="camera"></ion-icon>
+            <div>ถ่ายภาพ</div>
+          </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button clear small icon-left (click)="browsePicture()">
+            <ion-icon name="folder-open"></ion-icon>
+            <div>เลือกรูป</div>
+          </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button clear small color="danger" icon-left (click)="removePicture()">
+            <ion-icon name="trash"></ion-icon>
+            <div>ลบรูป</div>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </ion-item-group>
+</ion-content>

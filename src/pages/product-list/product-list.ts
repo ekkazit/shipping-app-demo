@@ -9,6 +9,7 @@ import { IProduct } from '../../models/product';
 
 // pages
 import { LoginPage } from '../login/login';
+import { ProductDetailPage } from '../product-detail/product-detail';
 
 @IonicPage()
 @Component({
@@ -75,7 +76,13 @@ export class ProductListPage {
     });
   }
 
-  add() { }
+  addProduct() {
+    this.navCtrl.push(ProductDetailPage, { 'product': {} });
+  }
+
+  editProduct(product) {
+    this.navCtrl.push(ProductDetailPage, { 'product': product });
+  }
 
   logout() {
     let nav = this.app.getRootNav();
