@@ -11,6 +11,9 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { Camera } from '@ionic-native/camera';
 import { BarcodeScanner } from "@ionic-native/barcode-scanner";
 import { SignaturePadModule } from 'angular2-signaturepad';
+import { Push } from '@ionic-native/push';
+import { IonicStorageModule } from '@ionic/storage';
+
 
 // components
 import { MyApp } from './app.component';
@@ -25,9 +28,11 @@ import { CustomerListPage } from '../pages/customer-list/customer-list';
 import { QrcodePage } from '../pages/qrcode/qrcode';
 import { ChartPage } from '../pages/chart/chart';
 import { SignaturePage } from '../pages/signature/signature';
+import { SettingPage } from '../pages/setting/setting';
 
 // providers
 import { ProductProvider } from '../providers/product/product';
+import { UserProvider } from '../providers/user/user';
 
 @NgModule({
   declarations: [
@@ -40,13 +45,15 @@ import { ProductProvider } from '../providers/product/product';
     CustomerListPage,
     QrcodePage,
     ChartPage,
-    SignaturePage
+    SignaturePage,
+    SettingPage,
   ],
   imports: [
     BrowserModule,
     HttpModule,
     SignaturePadModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot(),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -59,16 +66,19 @@ import { ProductProvider } from '../providers/product/product';
     CustomerListPage,
     QrcodePage,
     ChartPage,
-    SignaturePage
+    SignaturePage,
+    SettingPage,
   ],
   providers: [
     StatusBar,
     SplashScreen,
     Camera,
     BarcodeScanner,
+    Push,
+    ProductProvider,
+    UserProvider,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     { provide: 'API_URL', useValue: 'http://127.0.0.1:3000' },
-    ProductProvider
   ]
 })
-export class AppModule {}
+export class AppModule { }

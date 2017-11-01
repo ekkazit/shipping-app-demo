@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>ตั้งค่า</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label>รับข้อมูลข่าวสาร</ion-label>
+      <ion-toggle color="danger" [(ngModel)]="accept" (ionChange)="changeToggle()"></ion-toggle>
+    </ion-item>
+  </ion-list>
+  <ion-list no-lines>
+    <ion-item>
+      <ion-textarea [(ngModel)]="message" placeholder="ข้อความที่ต้องการส่ง ..."></ion-textarea>
+    </ion-item>
+  </ion-list>
+  <div padding>
+    <button ion-button block color="danger" (click)="sendNotification()">ส่งข้อความ</button>
+  </div>
+</ion-content>

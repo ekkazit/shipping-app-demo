@@ -5,6 +5,7 @@ import { CustomerListPage } from '../customer-list/customer-list';
 import { ProductListPage } from '../product-list/product-list';
 import { QrcodePage } from '../qrcode/qrcode';
 import { ChartPage } from '../chart/chart';
+import { SettingPage } from '../setting/setting';
 
 @Component({
   selector: 'page-home',
@@ -16,12 +17,15 @@ export class HomePage {
   tabQR: any;
   tabCustomer: any;
   tabChart: any;
+  tabSetting: any;
 
   constructor(public app: App, public navCtrl: NavController) {
     this.tabProduct = ProductListPage;
     this.tabQR = QrcodePage;
     this.tabCustomer = CustomerListPage;
     this.tabChart = ChartPage;
+    this.tabSetting = SettingPage;
   }
+
 
 }
