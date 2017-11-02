@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { App, IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 // providers
 import { ProductProvider } from '../../providers/product/product';
@@ -26,6 +27,7 @@ export class ProductListPage {
     public navParams: NavParams,
     public productProvider: ProductProvider,
     public loadingCtrl: LoadingController,
+    public storage: Storage,
   ) {
   }
 
@@ -41,20 +43,26 @@ export class ProductListPage {
 
     loader.present();
 
-    this.productProvider.getProducts().then((data:any) => {
-      this.products = data.rows;
-      loader.dismiss();
-    }, (err) => {
-      loader.dismiss();
+    let parent = this;
+    this.storage.get('token').then(function (token) {
+      parent.productProvider.getProducts(token).then((data: any) => {
+        parent.products = data.rows;
+        loader.dismiss();
+      }, (err) => {
+        loader.dismiss();
+      });
     });
   }
 
   doRefresh(refresher) {
-    this.productProvider.getProducts().then((data:any) => {
-      this.products = data.rows;
-      refresher.complete();
-    }, (err) => {
-      refresher.complete();
+    let parent = this;
+    this.storage.get('token').then(function (token) {
+      parent.productProvider.getProducts(token).then((data: any) => {
+        parent.products = data.rows;
+        refresher.complete();
+      }, (err) => {
+        refresher.complete();
+      });
     });
   }
 
@@ -68,11 +76,14 @@ export class ProductListPage {
 
     loader.present();
 
-    this.productProvider.searchProduct(query).then((data:any) => {
-      this.products = data.rows;
-      loader.dismiss();
-    }, (err) => {
-      loader.dismiss();
+    let parent = this;
+    this.storage.get('token').then(function (token) {
+      parent.productProvider.searchProduct(token, query).then((data: any) => {
+        parent.products = data.rows;
+        loader.dismiss();
+      }, (err) => {
+        loader.dismiss();
+      });
     });
   }
 
@@ -85,6 +96,8 @@ export class ProductListPage {
   }
 
   logout() {
+    this.storage.remove('token');
+
     let nav = this.app.getRootNav();
     nav.setRoot(LoginPage);
     alert('You have logged out');

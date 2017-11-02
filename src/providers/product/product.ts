@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 // interfaces
@@ -15,9 +15,16 @@ export class ProductProvider {
     console.log('Hello ProductProvider Provider');
   }
 
-  getProducts() {
+  getProducts(token) {
     return new Promise((resolve, reject) => {
-      this.http.get(this.url + '/products')
+
+      let headers = new Headers({
+        'Content-Type': 'application/json',
+        'x-access-token': token
+      });
+      let options = new RequestOptions({ headers: headers });
+
+      this.http.get(this.url + '/products', options)
         .map(res => res.json())
         .subscribe((data) => {
           resolve(data);
@@ -27,9 +34,15 @@ export class ProductProvider {
     });
   }
 
-  searchProduct(query) {
+  searchProduct(token, query) {
     return new Promise((resolve, reject) => {
-      this.http.get(this.url + '/products/search/' + query)
+      let headers = new Headers({
+        'Content-Type': 'application/json',
+        'x-access-token': token
+      });
+      let options = new RequestOptions({ headers: headers });
+
+      this.http.get(this.url + '/products/search/' + query, options)
         .map(res => res.json())
         .subscribe((data) => {
           resolve(data);

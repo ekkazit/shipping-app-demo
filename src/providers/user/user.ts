@@ -60,4 +60,23 @@ export class UserProvider {
         });
     });
   }
+
+
+  login(username, password) {
+    return new Promise((resolve, reject) => {
+      let data = {
+        username: username,
+        password: password
+      };
+      this.http.post(this.url + '/users/login', data)
+        .map(res => res.json())
+        .subscribe(data => {
+          resolve(data)
+        }, err => {
+          reject(err)
+        });
+    });
+  }
+
 }
+

@@ -13,7 +13,7 @@ import { BarcodeScanner } from "@ionic-native/barcode-scanner";
 import { SignaturePadModule } from 'angular2-signaturepad';
 import { Push } from '@ionic-native/push';
 import { IonicStorageModule } from '@ionic/storage';
-
+import { SQLite } from '@ionic-native/sqlite';
 
 // components
 import { MyApp } from './app.component';
@@ -77,6 +77,7 @@ import { UserProvider } from '../providers/user/user';
     Push,
     ProductProvider,
     UserProvider,
+    SQLite,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     { provide: 'API_URL', useValue: 'http://127.0.0.1:3000' },
   ]
