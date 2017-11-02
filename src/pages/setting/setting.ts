@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 
 import { Push, PushObject, PushOptions } from '@ionic-native/push';
 import { Storage } from '@ionic/storage';
@@ -22,6 +22,7 @@ export class SettingPage {
     public push: Push,
     public userProvider: UserProvider,
     public storage: Storage,
+    public toastCtrl: ToastController
   ) {
   }
 
@@ -53,8 +54,24 @@ export class SettingPage {
   }
 
   sendNotification() {
+    let toast = this.toastCtrl.create({
+      duration: 3000,
+    });
+
     let title = 'ทดสอบการส่ง Notification';
-    this.userProvider.sendPushNotificationAll(title, this.message);
+    this.userProvider.sendPushNotificationAll(title, this.message).then(function (data: any) {
+
+    });
+
+    this.userProvider.sendToLine(this.message).then(function (data: any) {
+      if (data.ok) {
+        this.message = '';
+        toast.setMessage('Send complete');
+      } else {
+        toast.setMessage('Send failed!');
+      }
+      toast.present();
+    });
   }
 
 }

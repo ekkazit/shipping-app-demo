@@ -45,4 +45,19 @@ export class UserProvider {
         });
     });
   }
+
+  sendToLine(message) {
+    return new Promise((resolve, reject) => {
+      let data = {
+        message: message,
+      };
+      this.http.post(this.url + '/line/send', data)
+        .map(res => res.json())
+        .subscribe(data => {
+          resolve(data)
+        }, err => {
+          reject(err)
+        });
+    });
+  }
 }
