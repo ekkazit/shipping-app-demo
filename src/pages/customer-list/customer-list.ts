@@ -1,5 +1,13 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform, LoadingController } from 'ionic-angular';
+import {
+  IonicPage,
+  NavController,
+  NavParams,
+  Platform,
+  LoadingController,
+  AlertController,
+  ToastController,
+} from 'ionic-angular';
 
 // plugins
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
@@ -30,6 +38,8 @@ export class CustomerListPage {
     public loadingCtrl: LoadingController,
     public sqlite: SQLite,
     public customerProvider: CustomerProvider,
+    public alertCtrl: AlertController,
+    public toastCtrl: ToastController,
   ) {
     this.initDB();
   }
@@ -92,6 +102,7 @@ export class CustomerListPage {
 
   getCustomers(db: SQLiteObject) {
     let parent = this;
+    this.customers = [];
     this.customerProvider.getCustomers(db).then((data: any) => {
       let rows = data.rows;
       for (let i = 0; i < rows.length; i++) {
@@ -107,7 +118,7 @@ export class CustomerListPage {
           photo: v.photo, lat: v.lat, lng: v.lng
         });
       };
-
+      console.log(this.customers.length);
       console.log('Get data completed');
     }, (error) => {
       console.log('Get data failed!', error);
@@ -124,12 +135,12 @@ export class CustomerListPage {
       // get from sqlite
       this.getCustomers(this.db);
     } else {
-      // get from api
-      this.customerProvider.getCustomerAPI().then((data: any) => {
-        this.customers = data.rows;
-      }, (error) => {
-        console.log('get data from API error');
-      });
+      // // get from api
+      // this.customerProvider.getCustomerAPI().then((data: any) => {
+      //   this.customers = data.rows;
+      // }, (error) => {
+      //   console.log('get data from API error');
+      // });
     }
 
     console.log('ionViewWillEnter CustomerListPage');
@@ -139,7 +150,37 @@ export class CustomerListPage {
     this.navCtrl.push(CustomerPage, { 'customer': customer });
   }
 
-  delete(customer: ICustomer) {
+  remove(customer: ICustomer) {
+    let toast = this.toastCtrl.create({
+      duration: 3000
+    });
+
+    let alert = this.alertCtrl.create({
+      title: 'ยืนยันการลบ',
+      message: 'ต้องการลบลูกค้าหรือไม่?',
+      buttons: [
+        {
+          text: 'ยกเลิก',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'ยืนยัน',
+          handler: () => {
+            this.customerProvider.delete(this.db, customer.id).then((data) => {
+              toast.setMessage('ลบข้อมูลเรียบร้อยแล้ว');
+              toast.present();
+              this.getCustomers(this.db);
+            }, (error) => {
+              console.log('Delete error', error);
+            });
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
   viewMap(customer: ICustomer) {
