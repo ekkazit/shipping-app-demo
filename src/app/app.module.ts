@@ -14,6 +14,9 @@ import { SignaturePadModule } from 'angular2-signaturepad';
 import { Push } from '@ionic-native/push';
 import { IonicStorageModule } from '@ionic/storage';
 import { SQLite } from '@ionic-native/sqlite';
+import { CallNumber } from '@ionic-native/call-number';
+import { GoogleMaps } from '@ionic-native/google-maps';
+import { Geolocation } from '@ionic-native/geolocation';
 
 // components
 import { MyApp } from './app.component';
@@ -29,6 +32,7 @@ import { QrcodePage } from '../pages/qrcode/qrcode';
 import { ChartPage } from '../pages/chart/chart';
 import { SignaturePage } from '../pages/signature/signature';
 import { SettingPage } from '../pages/setting/setting';
+import { MapPage } from '../pages/map/map';
 
 // providers
 import { ProductProvider } from '../providers/product/product';
@@ -48,6 +52,7 @@ import { CustomerProvider } from '../providers/customer/customer';
     ChartPage,
     SignaturePage,
     SettingPage,
+    MapPage,
   ],
   imports: [
     BrowserModule,
@@ -69,6 +74,7 @@ import { CustomerProvider } from '../providers/customer/customer';
     ChartPage,
     SignaturePage,
     SettingPage,
+    MapPage,
   ],
   providers: [
     StatusBar,
@@ -79,6 +85,9 @@ import { CustomerProvider } from '../providers/customer/customer';
     ProductProvider,
     UserProvider,
     SQLite,
+    CallNumber,
+    GoogleMaps,
+    Geolocation,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     { provide: 'API_URL', useValue: 'http://127.0.0.1:3000' },
     CustomerProvider,

@@ -87,4 +87,11 @@
         <variable name="SENDER_ID" value="449727425983" />
     </plugin>
     <plugin name="cordova-sqlite-storage" spec="~2.0.4" />
+    <plugin name="mx.ferreyra.callnumber" spec="~0.0.2" />
+    <engine name="android" spec="~6.3.0" />
+    <plugin name="cordova-plugin-googlemaps" spec="^2.1.1">
+        <variable name="API_KEY_FOR_ANDROID" value="AIzaSyBlrJSvSigBSeN9lI8KXY8DPHplLTiumo8" />
+        <variable name="API_KEY_FOR_IOS" value="AIzaSyB7WcTOwETiUt3vmgnuvp_xQffpP7xzBfQ" />
+    </plugin>
+    <plugin name="cordova-plugin-geolocation" spec="^2.4.3" />
 </widget>

@@ -11,6 +11,7 @@ import {
 
 // plugins
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
+import { CallNumber } from '@ionic-native/call-number';
 
 // providers
 import { CustomerProvider } from '../../providers/customer/customer';
@@ -20,6 +21,7 @@ import { ICustomer } from '../../models/customer';
 
 // pages
 import { CustomerPage } from '../customer/customer';
+import { MapPage } from '../map/map';
 
 @IonicPage()
 @Component({
@@ -40,6 +42,7 @@ export class CustomerListPage {
     public customerProvider: CustomerProvider,
     public alertCtrl: AlertController,
     public toastCtrl: ToastController,
+    public callNumber: CallNumber,
   ) {
     this.initDB();
   }
@@ -130,19 +133,11 @@ export class CustomerListPage {
   }
 
   ionViewWillEnter() {
-
     if (this.db) {
       // get from sqlite
       this.getCustomers(this.db);
     } else {
-      // // get from api
-      // this.customerProvider.getCustomerAPI().then((data: any) => {
-      //   this.customers = data.rows;
-      // }, (error) => {
-      //   console.log('get data from API error');
-      // });
     }
-
     console.log('ionViewWillEnter CustomerListPage');
   }
 
@@ -184,8 +179,12 @@ export class CustomerListPage {
   }
 
   viewMap(customer: ICustomer) {
+    this.navCtrl.push(MapPage, { 'customer': customer });
   }
 
   callPhone(customer: ICustomer) {
+    this.callNumber.callNumber(customer.phone, true)
+      .then(() => console.log('Launched dialer!'))
+      .catch(() => console.log('Error launching dialer'));
   }
 }
