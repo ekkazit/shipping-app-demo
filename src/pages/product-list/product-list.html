@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="danger">
     <ion-title>รายการสินค้า</ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="logout()">
@@ -7,16 +7,14 @@
       </button>
     </ion-buttons>
   </ion-navbar>
-  <ion-searchbar (ionInput)="search($event)" debounce="1000"></ion-searchbar>
+  <ion-toolbar color="danger">
+    <ion-searchbar (ionInput)="search($event)" debounce="1000"></ion-searchbar>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-refresher (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content
-      pullingIcon="arrow-dropdown"
-      pullingText="Pull to refresh"
-      refreshingSpinner="circles"
-      refreshingText="Refreshing...">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
     </ion-refresher-content>
   </ion-refresher>
   <ion-fab right bottom>
