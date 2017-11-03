@@ -63,6 +63,7 @@ export class UserProvider {
 
 
   login(username, password) {
+    console.log('user=' + username);
     return new Promise((resolve, reject) => {
       let data = {
         username: username,

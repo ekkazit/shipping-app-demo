@@ -33,6 +33,7 @@ import { SettingPage } from '../pages/setting/setting';
 // providers
 import { ProductProvider } from '../providers/product/product';
 import { UserProvider } from '../providers/user/user';
+import { CustomerProvider } from '../providers/customer/customer';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import { UserProvider } from '../providers/user/user';
     SQLite,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     { provide: 'API_URL', useValue: 'http://127.0.0.1:3000' },
+    CustomerProvider,
   ]
 })
 export class AppModule { }

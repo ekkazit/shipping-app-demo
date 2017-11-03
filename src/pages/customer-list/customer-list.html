@@ -1,18 +1,44 @@
-<!--
-  Generated template for the CustomerListPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>customer-list</ion-title>
+    <ion-title>รายชื่อลูกค้า</ion-title>
   </ion-navbar>
-
+  <ion-toolbar>
+    <ion-searchbar debounce="1000"></ion-searchbar>
+  </ion-toolbar>
 </ion-header>
 
-
-<ion-content padding>
-
+<ion-content>
+  <ion-item-group>
+    <ion-list>
+      <ion-item-sliding *ngFor="let cust of customers">
+        <ion-item>
+          <ion-avatar item-left>
+            <img [src]="cust.photo" *ngIf="cust.photo">
+          </ion-avatar>
+          <h1>{{ cust.firstname }}</h1>
+          <p>Tel. {{ cust.phone }}</p>
+        </ion-item>
+        <ion-item-options side="right">
+          <button ion-button (click)="edit(cust)">
+            <ion-icon name="create"></ion-icon>
+            แก้ไข
+          </button>
+          <button ion-button (click)="viewMap(cust)">
+            <ion-icon name="map"></ion-icon>
+            แผนที่
+          </button>
+          <button ion-button [disabled]="!cust.phone" (click)="callPhone(cust.phone)">
+            <ion-icon name="call"></ion-icon>
+            โทร
+          </button>
+        </ion-item-options>
+        <ion-item-options side="left">
+          <button ion-button color="danger" (click)="remove(cust)">
+            <ion-icon name="trash"></ion-icon>
+            ลบ
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  </ion-item-group>
 </ion-content>

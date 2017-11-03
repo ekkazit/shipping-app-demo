@@ -1,12 +1,30 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Customer</ion-title>
+    <ion-title>ข้อมูลลูกค้า</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-left [disabled]="firstname.errors" (click)="save()">
+        <ion-icon name="create"></ion-icon>
+        SAVE
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h1>{{ customer.name }}</h1>
-  <p>ID: {{ customer.id }}</p>
-  <p>Email: {{ customer.email }}</p>
-  <button ion-button block color="danger" (click)="backToHome()">ย้อนกลับ</button>
+<ion-content>
+  <ion-item-group>
+    <ion-item-divider color="light">ข้อมูลทั่วไป</ion-item-divider>
+    <ion-item>
+      <ion-label floating>ชื่อ</ion-label>
+      <ion-input type="text" [(ngModel)]="customer.firstname" id="firstname" #firstname="ngModel" required></ion-input>
+    </ion-item>
+    <div padding class="error-border" *ngIf="firstname.errors && (firstname.dirty || firstname.touched)">กรุณากรอกชื่อลูกค้า</div>
+    <ion-item>
+      <ion-label floating>นามสกุล</ion-label>
+      <ion-input type="text" [(ngModel)]="customer.lastname"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>เบอร์โทรศัพท์</ion-label>
+      <ion-input type="text" [(ngModel)]="customer.phone"></ion-input>
+    </ion-item>
+  </ion-item-group>
 </ion-content>
