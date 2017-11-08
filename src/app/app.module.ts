@@ -38,6 +38,7 @@ import { MapPage } from '../pages/map/map';
 import { ProductProvider } from '../providers/product/product';
 import { UserProvider } from '../providers/user/user';
 import { CustomerProvider } from '../providers/customer/customer';
+import { Base64ToGallery } from '@ionic-native/base64-to-gallery';
 
 @NgModule({
   declarations: [
@@ -88,6 +89,7 @@ import { CustomerProvider } from '../providers/customer/customer';
     CallNumber,
     GoogleMaps,
     Geolocation,
+    Base64ToGallery,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     { provide: 'API_URL', useValue: 'http://127.0.0.1:3000' },
     CustomerProvider,
