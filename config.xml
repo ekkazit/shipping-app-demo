@@ -76,6 +76,7 @@
         <splash height="480" src="resources/ios/splash/Default~iphone.png" width="320" />
         <splash height="2732" src="resources/ios/splash/Default@2x~universal~anyany.png" width="2732" />
     </platform>
+    <engine name="android" spec="^6.3.0" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
     <plugin name="cordova-plugin-whitelist" spec="^1.3.1" />
     <plugin name="cordova-plugin-device" spec="^1.1.4" />
@@ -88,10 +89,11 @@
     </plugin>
     <plugin name="cordova-sqlite-storage" spec="~2.0.4" />
     <plugin name="mx.ferreyra.callnumber" spec="~0.0.2" />
-    <engine name="android" spec="~6.3.0" />
     <plugin name="cordova-plugin-googlemaps" spec="^2.1.1">
         <variable name="API_KEY_FOR_ANDROID" value="AIzaSyBlrJSvSigBSeN9lI8KXY8DPHplLTiumo8" />
         <variable name="API_KEY_FOR_IOS" value="AIzaSyB7WcTOwETiUt3vmgnuvp_xQffpP7xzBfQ" />
     </plugin>
     <plugin name="cordova-plugin-geolocation" spec="^2.4.3" />
+    <plugin name="cordova-plugin-crypt-file" spec="^1.3.3" />
+    <plugin name="cordova-base64-to-gallery" spec="^4.1.2" />
 </widget>
