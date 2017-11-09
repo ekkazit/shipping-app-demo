@@ -27,10 +27,22 @@
       <ion-input type="text" [(ngModel)]="customer.phone"></ion-input>
     </ion-item>
   </ion-item-group>
-  <div padding>
-    <button ion-button color="light" block (click)="syncDataToDB()">
-      <ion-icon name="sync"></ion-icon>
-      Sync to DB
-    </button>
+  <div>
+    <ion-row>
+      <ion-col>
+        <button ion-button color="light" block (click)="syncDataToDB()">
+          <ion-icon name="sync"></ion-icon>
+          Sync to DB
+        </button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <button ion-button color="light" block (click)="loadDataFromDB()">
+          <ion-icon name="refresh"></ion-icon>
+          Load Data
+        </button>
+      </ion-col>
+    </ion-row>
   </div>
 </ion-content>

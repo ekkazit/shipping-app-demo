@@ -88,6 +88,8 @@ export class CustomerListPage {
       if (rows.length > 0) {
         // exist data from SQLite
         console.log('Data exist in SQLite')
+        this.getCustomers(db);
+
       } else {
         console.log('Load new data from API');
         this.loadFromAPI(db);

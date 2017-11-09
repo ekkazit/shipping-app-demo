@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform, ToastController, LoadingController, } from 'ionic-angular';
 // plugins
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 
@@ -27,6 +27,7 @@ export class CustomerPage {
     public customerProvider: CustomerProvider,
     public platform: Platform,
     public toastCtrl: ToastController,
+    public loadingCtrl: LoadingController,
   ) {
 
     platform.ready().then(() => {
@@ -82,11 +83,36 @@ export class CustomerPage {
 
     this.customerProvider.syncData(this.db, this.customer).then((data) => {
       console.log('Sync Completed!');
-      toast.setMessage('บันทึกข้อมูลเรียบร้อยแล้ว');
+      toast.setMessage('Sync ข้อมูลลงในส่วนกลางเรียบร้อยแล้ว');
       toast.present();
       this.navCtrl.pop();
     }, (error) => {
       console.log('Sync Failed!', error);
     });
+  }
+
+  loadDataFromDB() {
+    this.loadFromAPI(this.db);
+  }
+
+  loadFromAPI(db: SQLiteObject) {
+    let toast = this.toastCtrl.create({
+      duration: 3000,
+    });
+
+    console.log('Start loading data from API...');
+    let parent = this;
+    this.customerProvider.deleteAll(db).then((data) => {
+      parent.customerProvider.loadFromAPI(db).then((data) => {
+        toast.setMessage('โหลดข้อมูลจากส่วนกลางเรียบร้อยแล้ว');
+        toast.present();
+        parent.navCtrl.pop();
+      }, (error) => {
+        console.log('Load data failed!', error);
+      });
+    }, (error) => {
+      console.log('Delete before load data failed!', error)
+    });
+    console.log('Load data completed!');
   }
 }
