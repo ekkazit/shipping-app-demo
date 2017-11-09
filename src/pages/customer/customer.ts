@@ -75,4 +75,18 @@ export class CustomerPage {
 
   }
 
+  syncDataToDB() {
+    let toast = this.toastCtrl.create({
+      duration: 3000,
+    });
+
+    this.customerProvider.syncData(this.db, this.customer).then((data) => {
+      console.log('Sync Completed!');
+      toast.setMessage('บันทึกข้อมูลเรียบร้อยแล้ว');
+      toast.present();
+      this.navCtrl.pop();
+    }, (error) => {
+      console.log('Sync Failed!', error);
+    });
+  }
 }
