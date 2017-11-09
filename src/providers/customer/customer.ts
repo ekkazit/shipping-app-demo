@@ -22,10 +22,11 @@ export class CustomerProvider {
   insert(db: SQLiteObject, customer: ICustomer) {
     return new Promise((resolve, reject) => {
       let sql = `
-        insert into customer (firstname, lastname, gender, email, address, phone, photo, lat, lng)
-        values(?,?,?,?,?,?,?,?,?)
+        insert into customer (id, firstname, lastname, gender, email, address, phone, photo, lat, lng)
+        values(?,?,?,?,?,?,?,?,?,?)
       `;
       db.executeSql(sql, [
+        customer.id,
         customer.firstname,
         customer.lastname,
         customer.gender,
@@ -120,14 +121,15 @@ export class CustomerProvider {
 
     return new Promise((resolve, reject) => {
       let sql = `
-        insert into customer (firstname, lastname, gender, email, address, phone, photo, lat, lng)
-        values(?,?,?,?,?,?,?,?,?)
+        insert into customer (id, firstname, lastname, gender, email, address, phone, photo, lat, lng)
+        values(?,?,?,?,?,?,?,?,?,?)
       `;
 
       parent.getCustomerAPI().then((data: any) => {
         let customers = data.rows;
         customers.forEach((v) => {
           db.executeSql(sql, [
+            v.id,
             v.firstname,
             v.lastname,
             v.gender,
