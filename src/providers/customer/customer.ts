@@ -151,7 +151,7 @@ export class CustomerProvider {
   syncData(db: SQLiteObject, customer: ICustomer) {
     return new Promise((resolve, reject) => {
       let data = {
-        productId: customer.id,
+        customerId: customer.id,
         firstname: customer.firstname,
         lastname: customer.lastname,
         gender: customer.gender,

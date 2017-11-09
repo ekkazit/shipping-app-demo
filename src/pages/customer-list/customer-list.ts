@@ -65,7 +65,7 @@ export class CustomerListPage {
   createTable(db: SQLiteObject) {
     let sql = `
       create table if not exists customer (
-        id integer primary key autoincrement,
+        id integer primary key,
         firstname varchar(50) not null,
         lastname varchar(50),
         gender varchar(1),

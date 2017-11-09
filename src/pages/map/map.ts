@@ -42,6 +42,9 @@ export class MapPage {
 
   loadMap() {
 
+    setInterval(function () {
+      console.log('second passed');
+    }, 1000);
 
 
 
