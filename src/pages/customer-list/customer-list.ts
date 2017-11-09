@@ -54,15 +54,9 @@ export class CustomerListPage {
         location: 'default'
       })
         .then((db: SQLiteObject) => {
-
-          this.customerProvider.getCustomers(db).then((data: any) => {
-            let rows = data.rows;
-          }, (error) => {
-            this.db = db;
-            this.createTable(db);
-            this.checkSQLiteData(db);
-          });
-
+          this.db = db;
+          this.createTable(db);
+          this.checkSQLiteData(db);
         })
         .catch(e => console.log(e));
     });
