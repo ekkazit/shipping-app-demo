@@ -54,9 +54,14 @@ export class CustomerListPage {
         location: 'default'
       })
         .then((db: SQLiteObject) => {
-          this.db = db;
-          this.createTable(db);
-          this.loadFromAPI(db);
+
+          this.customerProvider.getCustomers(db).then((data: any) => {
+            let rows = data.rows;
+          }, (error) => {
+            this.db = db;
+            this.createTable(db);
+            this.checkSQLiteData(db);
+          });
 
         })
         .catch(e => console.log(e));
@@ -81,6 +86,19 @@ export class CustomerListPage {
     }, (error) => {
       console.log('Create table failed! ', error);
     });
+  }
+
+  checkSQLiteData(db: SQLiteObject) {
+    this.customerProvider.getCustomers(db).then((data: any) => {
+      let rows = data.rows;
+      if (rows.length > 0) {
+        // exist data from SQLite
+        console.log('Data exist in SQLite')
+      } else {
+        console.log('Load new data from API');
+        this.loadFromAPI(db);
+      }
+    }, (error) => { });
   }
 
   loadFromAPI(db: SQLiteObject) {
