@@ -41,16 +41,14 @@ export class MapPage {
   }
 
   loadMap() {
-
     setInterval(function () {
       console.log('second passed');
     }, 1000);
 
-
-
     this.geolocation.getCurrentPosition({ enableHighAccuracy: true }).then((resp) => {
-      this.mapElement = document.getElementById('map');
+      console.log('response lat=', resp.coords.latitude, ' lng=', resp.coords.longitude);
 
+      this.mapElement = document.getElementById('map');
       let mapOptions: GoogleMapOptions = {
         camera: {
           target: {
@@ -71,8 +69,6 @@ export class MapPage {
           'zoom': true
         },
       };
-
-      console.log('debofre run map');
 
       this.map = new GoogleMap(this.mapElement, mapOptions);
       this.map.one(GoogleMapsEvent.MAP_READY)
@@ -97,6 +93,14 @@ export class MapPage {
             }
           });
         });
+    }).catch((error) => {
+      console.log('Error getting location', error);
     });
+
+    let watch = this.geolocation.watchPosition();
+    watch.subscribe((data) => {
+      console.log('subscript lat=', data.coords.latitude, ' lng=', data.coords.longitude);
+    });
+
   }
 }
