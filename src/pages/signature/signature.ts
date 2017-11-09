@@ -40,10 +40,13 @@ export class SignaturePage {
   drawComplete() {
     this.signatureImage = this.signaturePad.toDataURL();
 
-    this.base64ToGallery.base64ToGallery(this.signatureImage, { prefix: '_img' }).then(
+    this.base64ToGallery.base64ToGallery(this.signatureImage, {
+      prefix: '_img',
+      mediaScanner: true,
+    }).then(
       res => console.log('Saved image to gallery ', res),
       err => console.log('Error saving image to gallery ', err)
-    );
+      );
 
     this.viewCtrl.dismiss({ signatureImage: this.signatureImage });
   }
@@ -64,3 +67,4 @@ export class SignaturePage {
     this.canvasResize();
   }
 }
+

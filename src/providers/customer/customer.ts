@@ -146,4 +146,27 @@ export class CustomerProvider {
     });
   }
 
+  syncData(db: SQLiteObject, customer: ICustomer) {
+    return new Promise((resolve, reject) => {
+      let data = {
+        productId: customer.id,
+        firstname: customer.firstname,
+        lastname: customer.lastname,
+        gender: customer.gender,
+        email: customer.email,
+        address: customer.address,
+        phone: customer.phone,
+        photo: customer.photo,
+        lat: customer.lat,
+        lng: customer.lng
+      };
+      this.http.post(this.url + '/customers/syncdata', data)
+        .map(res => res.json())
+        .subscribe(data => {
+          resolve(data)
+        }, err => {
+          reject(err)
+        });
+    });
+  }
 }
