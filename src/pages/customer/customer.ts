@@ -77,11 +77,13 @@ export class CustomerPage {
   }
 
   syncDataToDB() {
+    console.log('Sync Data start');
     let toast = this.toastCtrl.create({
       duration: 3000,
     });
 
     this.customerProvider.syncData(this.db, this.customer).then((data) => {
+      console.log('data=', data);
       console.log('Sync Completed!');
       toast.setMessage('Sync ข้อมูลลงในส่วนกลางเรียบร้อยแล้ว');
       toast.present();
