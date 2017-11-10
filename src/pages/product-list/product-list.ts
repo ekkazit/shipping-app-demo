@@ -98,7 +98,9 @@ export class ProductListPage {
   logout() {
 
     let promise = new Promise((resolve, reject) => {
+      this.storage.remove('userId');
       this.storage.remove('token');
+      this.storage.remove('username');
       resolve('success');
     });
 
