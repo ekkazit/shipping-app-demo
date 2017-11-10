@@ -19,10 +19,10 @@ export class ProductProvider {
     return new Promise((resolve, reject) => {
 
       let headers = new Headers({
-        'Content-Type': 'application/json',
         'x-access-token': token
       });
       let options = new RequestOptions({ headers: headers });
+
 
       this.http.get(this.url + '/products', options)
         .map(res => res.json())

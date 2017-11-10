@@ -45,7 +45,7 @@ export class MapPage {
       console.log('second passed');
     }, 1000);
 
-    this.geolocation.getCurrentPosition({ enableHighAccuracy: true }).then((resp) => {
+    this.geolocation.getCurrentPosition({ enableHighAccuracy: true, timeout: 5000 }).then((resp) => {
       console.log('response lat=', resp.coords.latitude, ' lng=', resp.coords.longitude);
 
       this.mapElement = document.getElementById('map');

@@ -96,7 +96,30 @@ export class ProductListPage {
   }
 
   logout() {
-    this.storage.remove('token');
+
+    let promise = new Promise((resolve, reject) => {
+      this.storage.remove('token');
+      resolve('success');
+    });
+
+    console.log('Before check localStorage');
+
+    promise.then((data) => {
+      this.storage.get('userId').then(function (value) {
+        console.log('userId=', value);
+      });
+
+      this.storage.get('token').then(function (value) {
+        console.log('token=', value);
+      });
+
+      this.storage.get('username').then(function (value) {
+        console.log('username=', value);
+      });
+
+    }, (err) => { });
+
+    console.log('After check localStorage');
 
     let nav = this.app.getRootNav();
     nav.setRoot(LoginPage);
