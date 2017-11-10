@@ -65,7 +65,6 @@ export class SettingPage {
 
     this.userProvider.sendToLine(this.message).then(function (data: any) {
       if (data.ok) {
-        this.message = '';
         toast.setMessage('Send complete');
       } else {
         toast.setMessage('Send failed!');
